@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para o Amor da Minha Vida</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(160deg, #ff5f9e, #ff87b2);
+  color: white;
+  overflow: hidden;
+}
+
+/* ===== TELA INICIAL ===== */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #ff4f8b, #ff9ac1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: opacity 1s ease;
+  z-index: 10;
+}
+
+#intro h1 {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+#intro button {
+  padding: 14px 34px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #ff4f8b;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, background 0.3s;
+}
+
+#intro button:hover {
+  transform: scale(1.07);
+  background: #ffe6ef;
+}
+
+/* ===== TELAS ===== */
+#main, #final {
+  opacity: 0;
+  display: none;
+  transition: opacity 1s ease;
+}
+
+/* CONTAINER */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 16px;
+  text-align: center;
+}
+
+/* FOTO CENTRAL */
+.photo-frame {
+  width: 85%;
+  max-width: 360px;
+  height: 420px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  border: 3px solid rgba(255,255,255,0.5);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 1.3s ease-in-out;
+}
+
+/* VERSÍCULOS */
+.verse-box {
+  margin-top: 18px;
+  font-size: 19px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.35);
+  padding: 18px 18px;
+  border-radius: 16px;
+  line-height: 1.5;
+  max-width: 92%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.25);
+}
+
+/* ===== BOTÃO FINAL ===== */
+#final-btn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: white;
+  color: #ff4f8b;
+  padding: 12px 18px;
+  border-radius: 25px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+#final-btn:hover {
+  transform: scale(1.08);
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+#back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: white;
+  color: #ff4f8b;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+#back-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ===== ÁREA DAS MENSAGENS ===== */
+#love-area {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 220px;
+  height: 220px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.love-message {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0;
+  animation: floatUp 5s ease forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(0); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-160px); }
+}
+
+/* ===== TELA FINAL ===== */
+#final {
+  background: linear-gradient(160deg, #ff4f8b, #ff87b2);
+}
+
+.final-text {
+  font-size: 20px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.35);
+  padding: 22px;
+  border-radius: 18px;
+  line-height: 1.6;
+  max-width: 92%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.35);
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== TELA INICIAL ===== -->
+<div id="intro">
+  <h1>Tenho algo especial pra você 💖</h1>
+  <button onclick="startLove()">Eu te amo ❤️</button>
+</div>
+
+<!-- ===== TELA PRINCIPAL ===== -->
+<div id="main">
+  <div class="container">
+    <div class="photo-frame">
+      <img id="photo" src="foto1.jpg">
+    </div>
+    <div class="verse-box" id="verse"></div>
+  </div>
+
+  <button id="final-btn" onclick="goFinal()">Surpresa 💌</button>
+</div>
+
+<!-- ===== TELA FINAL ===== -->
+<div id="final">
+  <button id="back-btn" onclick="backMain()">← Voltar</button>
+  <div class="container">
+    <div class="final-text">
+      <p>
+        Meu amor,<br>
+        tudo em mim escolhe você.<br>
+        Você é meu presente de Deus, minha paz, meu sonho e meu futuro.<br>
+        Prometo te amar, cuidar de você e caminhar ao seu lado todos os dias.<br>
+        Cânticos 4:7 — "Você é toda linda, minha querida, e em você não há defeito".<br>
+        Obrigado por existir. Eu te amo mais do que palavras podem explicar. ❤️
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ÁREA DAS MENSAGENS -->
+<div id="love-area"></div>
+
+<script>
+// ===== TRANSIÇÕES =====
+function startLove() {
+  document.getElementById("intro").style.opacity = 0;
+  setTimeout(() => {
+    document.getElementById("intro").style.display = "none";
+    const main = document.getElementById("main");
+    main.style.display = "block";
+    main.style.opacity = 1;
+  }, 900);
+}
+
+function goFinal() {
+  const main = document.getElementById("main");
+  main.style.opacity = 0;
+  setTimeout(() => {
+    main.style.display = "none";
+    const final = document.getElementById("final");
+    final.style.display = "block";
+    final.style.opacity = 1;
+  }, 900);
+}
+
+function backMain() {
+  const final = document.getElementById("final");
+  final.style.opacity = 0;
+  setTimeout(() => {
+    final.style.display = "none";
+    const main = document.getElementById("main");
+    main.style.display = "block";
+    main.style.opacity = 1;
+  }, 900);
+}
+
+// ===== FOTOS =====
+const photos = [
+  "foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg",
+  "foto6.jpg","foto7.jpg","foto8.jpg","foto9.jpg"
+];
+let photoIndex = 0;
+const photo = document.getElementById("photo");
+
+setInterval(() => {
+  photo.style.opacity = 0;
+  setTimeout(() => {
+    photoIndex = (photoIndex + 1) % photos.length;
+    photo.src = photos[photoIndex];
+    photo.style.opacity = 1;
+  }, 700);
+}, 3500);
+
+// ===== VERSÍCULOS (MUITOS) =====
+const verses = [
+  "O amor é paciente, o amor é bondoso. — 1 Coríntios 13:4",
+  "O amor nunca falha. — 1 Coríntios 13:8",
+  "Muitas águas não podem apagar o amor. — Cantares 8:7",
+  "Deus é amor. — 1 João 4:8",
+  "Nós amamos porque Ele nos amou primeiro. — 1 João 4:19",
+  "Tudo sofre, tudo crê, tudo espera. — 1 Coríntios 13:7",
+  "O amor procede de Deus. — 1 João 4:7",
+  "Melhor são dois do que um. — Eclesiastes 4:9",
+  "Ponham o amor como elo perfeito. — Colossenses 3:14",
+  "Entrega o teu caminho ao Senhor. — Salmos 37:5",
+  "Que o amor de Cristo habite em vocês. — Efésios 3:17",
+  "O Senhor te abençoe e te guarde. — Números 6:24",
+  "O Senhor é bondoso e compassivo. — Salmos 103:8",
+  "Quem ama conhece a Deus. — 1 João 4:7",
+  "O amor cobre uma multidão de pecados. — 1 Pedro 4:8",
+  "Ame o seu próximo como a si mesmo. — Marcos 12:31",
+  "Façam tudo com amor. — 1 Coríntios 16:14",
+  "O Senhor firma os passos de quem o ama. — Salmos 37:23",
+  "O amor edifica. — 1 Coríntios 8:1",
+  "Amem uns aos outros como eu os amei. — João 13:34",
+  "O Senhor é misericordioso e cheio de amor. — Salmos 145:8",
+  "Nada pode nos separar do amor de Deus. — Romanos 8:39",
+  "Bem-aventurados os que amam. — Mateus 5:9",
+  "Seja o amor sem hipocrisia. — Romanos 12:9",
+  "O amor traz alegria. — Provérbios 10:12",
+  "Aquele que ama permanece em Deus. — 1 João 4:16",
+  "Cânticos 4:7 — Você é toda linda, minha querida, e em você não há defeito."
+];
+let verseIndex = 0;
+const verseBox = document.getElementById("verse");
+
+function changeVerse() {
+  verseBox.innerText = verses[verseIndex];
+  verseIndex = (verseIndex + 1) % verses.length;
+}
+changeVerse();
+setInterval(changeVerse, 5000);
+
+// ===== MENSAGENS DE AMOR =====
+const loveMessages = [
+  "Eu te amo ❤️","Você é meu milagre ✨","Meu coração é seu 💖",
+  "Minha oração favorita 🙏","Meu futuro é com você 💍",
+  "Você é meu lar 🏡","Presente de Deus 💝","Minha paz 🕊️",
+  "Amor da minha vida 💞","Minha bênção ✝️","Te escolheria mil vezes 💕",
+  "Você é meu tudo 💗","Minha pessoa favorita 💘","Meu sonho 🌙",
+  "Resposta de oração 🙏","Prometo cuidar de você 💌",
+  "Minha história favorita 📖","Presente eterno 💓",
+  "Com você tudo faz sentido 💖","Deus nos uniu ❤️"
+];
+
+const loveArea = document.getElementById("love-area");
+
+function createLoveMessage() {
+  const msg = document.createElement("div");
+  msg.className = "love-message";
+  msg.innerText = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+  msg.style.left = Math.random() * 20 + "px";
+  loveArea.appendChild(msg);
+  setTimeout(() => msg.remove(), 5000);
+}
+
+setInterval(createLoveMessage, 900);
+</script>
+
+</body>
+</html>
